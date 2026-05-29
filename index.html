@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>HungVi Development</title>
+
+  <style>
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:Arial, Helvetica, sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#020617;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* HEADER */
+
+    header{
+      width:100%;
+      padding:22px 8%;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      position:fixed;
+      top:0;
+      left:0;
+      z-index:1000;
+      background:rgba(2,6,23,0.85);
+      backdrop-filter:blur(12px);
+      border-bottom:1px solid rgba(255,255,255,0.05);
+    }
+
+    .logo{
+      font-size:30px;
+      font-weight:bold;
+      color:#38bdf8;
+    }
+
+    nav{
+      display:flex;
+      align-items:center;
+      gap:30px;
+    }
+
+    nav a{
+      text-decoration:none;
+      color:white;
+      transition:0.3s;
+      font-size:15px;
+    }
+
+    nav a:hover{
+      color:#38bdf8;
+    }
+
+    .nav-btn{
+      padding:12px 22px;
+      background:#38bdf8;
+      border-radius:12px;
+      color:white !important;
+      font-weight:bold;
+      box-shadow:0 10px 30px rgba(56,189,248,0.4);
+    }
+
+    /* HERO */
+
+    .hero{
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      padding:140px 8% 80px;
+      gap:70px;
+      position:relative;
+    }
+
+    .hero::before{
+      content:"";
+      position:absolute;
+      width:500px;
+      height:500px;
+      background:#38bdf8;
+      filter:blur(180px);
+      opacity:0.15;
+      top:-100px;
+      right:-100px;
+      z-index:-1;
+    }
+
+    .hero-content{
+      flex:1;
+    }
+
+    .badge{
+      display:inline-block;
+      padding:10px 18px;
+      background:rgba(56,189,248,0.15);
+      color:#38bdf8;
+      border:1px solid rgba(56,189,248,0.3);
+      border-radius:999px;
+      margin-bottom:25px;
+      font-size:14px;
+    }
+
+    .hero-content h1{
+      font-size:72px;
+      line-height:1.1;
+      margin-bottom:25px;
+    }
+
+    .hero-content h1 span{
+      color:#38bdf8;
+    }
+
+    .hero-content p{
+      font-size:18px;
+      line-height:1.8;
+      color:#cbd5e1;
+      max-width:650px;
+      margin-bottom:40px;
+    }
+
+    .buttons{
+      display:flex;
+      gap:20px;
+      flex-wrap:wrap;
+    }
+
+    .btn{
+      padding:16px 34px;
+      border-radius:14px;
+      text-decoration:none;
+      font-weight:bold;
+      transition:0.3s;
+      display:inline-block;
+      font-size:16px;
+    }
+
+    .btn-primary{
+      background:#38bdf8;
+      color:white;
+      box-shadow:0 15px 35px rgba(56,189,248,0.35);
+    }
+
+    .btn-primary:hover{
+      transform:translateY(-5px);
+      background:#0ea5e9;
+    }
+
+    .btn-outline{
+      border:2px solid rgba(255,255,255,0.1);
+      color:white;
+      background:rgba(255,255,255,0.03);
+    }
+
+    .btn-outline:hover{
+      background:#1e293b;
+      transform:translateY(-5px);
+    }
+
+    /* RIGHT SIDE */
+
+    .hero-image{
+      flex:1;
+      display:flex;
+      justify-content:center;
+      position:relative;
+    }
+
+    .main-card{
+      width:420px;
+      height:470px;
+      border-radius:30px;
+      background:linear-gradient(145deg,#0f172a,#111827);
+      border:1px solid rgba(255,255,255,0.08);
+      box-shadow:0 30px 80px rgba(0,0,0,0.5);
+      padding:30px;
+      position:relative;
+      overflow:hidden;
+    }
+
+    .main-card::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:linear-gradient(135deg,rgba(56,189,248,0.2),transparent);
+    }
+
+    .chat-header{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:25px;
+    }
+
+    .avatar{
+      width:55px;
+      height:55px;
+      border-radius:50%;
+      background:#38bdf8;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      font-size:24px;
+    }
+
+    .online{
+      color:#4ade80;
+      font-size:14px;
+      margin-top:5px;
+    }
+
+    .message{
+      background:#1e293b;
+      padding:18px;
+      border-radius:18px;
+      margin-bottom:18px;
+      line-height:1.6;
+      color:#e2e8f0;
+      animation:float 4s ease-in-out infinite;
+    }
+
+    .message.user{
+      background:#38bdf8;
+      margin-left:60px;
+    }
+
+    @keyframes float{
+      0%{
+        transform:translateY(0px);
+      }
+      50%{
+        transform:translateY(-8px);
+      }
+      100%{
+        transform:translateY(0px);
+      }
+    }
+
+    /* TRUST */
+
+    .trust{
+      padding:40px 8%;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:25px;
+      margin-top:-40px;
+    }
+
+    .trust-box{
+      background:#111827;
+      padding:30px;
+      border-radius:22px;
+      border:1px solid rgba(255,255,255,0.05);
+      transition:0.3s;
+    }
+
+    .trust-box:hover{
+      transform:translateY(-10px);
+      border-color:#38bdf8;
+    }
+
+    .trust-box h3{
+      font-size:35px;
+      color:#38bdf8;
+      margin-bottom:10px;
+    }
+
+    .trust-box p{
+      color:#cbd5e1;
+      line-height:1.6;
+    }
+
+    /* SERVICES */
+
+    .services{
+      padding:110px 8%;
+    }
+
+    .section-title{
+      text-align:center;
+      margin-bottom:70px;
+    }
+
+    .section-title h2{
+      font-size:50px;
+      margin-bottom:15px;
+    }
+
+    .section-title p{
+      color:#94a3b8;
+      font-size:18px;
+    }
+
+    .service-grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .service-card{
+      background:#111827;
+      padding:35px;
+      border-radius:24px;
+      transition:0.4s;
+      border:1px solid rgba(255,255,255,0.05);
+    }
+
+    .service-card:hover{
+      transform:translateY(-12px);
+      border-color:#38bdf8;
+      background:#172033;
+    }
+
+    .icon{
+      font-size:55px;
+      margin-bottom:25px;
+    }
+
+    .service-card h3{
+      font-size:26px;
+      margin-bottom:15px;
+    }
+
+    .service-card p{
+      color:#cbd5e1;
+      line-height:1.7;
+    }
+
+    /* CTA */
+
+    .cta{
+      padding:100px 8%;
+    }
+
+    .cta-box{
+      background:linear-gradient(135deg,#38bdf8,#2563eb);
+      border-radius:35px;
+      padding:70px;
+      text-align:center;
+      box-shadow:0 30px 80px rgba(37,99,235,0.35);
+    }
+
+    .cta-box h2{
+      font-size:52px;
+      margin-bottom:20px;
+    }
+
+    .cta-box p{
+      font-size:18px;
+      line-height:1.8;
+      max-width:800px;
+      margin:auto;
+      margin-bottom:35px;
+    }
+
+    .cta-box a{
+      background:white;
+      color:#2563eb;
+      padding:16px 35px;
+      border-radius:14px;
+      font-weight:bold;
+      text-decoration:none;
+      display:inline-block;
+      transition:0.3s;
+    }
+
+    .cta-box a:hover{
+      transform:translateY(-5px);
+    }
+
+    footer{
+      text-align:center;
+      padding:35px;
+      color:#94a3b8;
+      background:#020617;
+      border-top:1px solid rgba(255,255,255,0.05);
+    }
+
+    @media(max-width:950px){
+
+      .hero{
+        flex-direction:column;
+        text-align:center;
+      }
+
+      .hero-content h1{
+        font-size:50px;
+      }
+
+      .buttons{
+        justify-content:center;
+      }
+
+      nav{
+        display:none;
+      }
+
+      .main-card{
+        width:100%;
+        max-width:420px;
+      }
+
+      .cta-box{
+        padding:50px 25px;
+      }
+
+      .cta-box h2{
+        font-size:38px;
+      }
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">HungViDev</div>
+
+    <nav>
+      <a href="#">Trang Chủ</a>
+      <a href="#">Dịch Vụ</a>
+      <a href="#">Dự Án</a>
+      <a href="#">Liên Hệ</a>
+      <a href="#" class="nav-btn">Chat Ngay</a>
+    </nav>
+  </header>
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <div class="badge">
+        🚀 Hỗ trợ khách hàng trực tuyến 24/7
+      </div>
+
+      <h1>
+        Thiết Kế <span>Website Hiện Đại</span><br>
+        Tăng Tỷ Lệ Chuyển Đổi
+      </h1>
+
+      <p>
+        Chúng tôi chuyên xây dựng landing page, website doanh nghiệp,
+        hệ thống bán hàng và giao diện hiện đại giúp tăng trải nghiệm
+        người dùng và tăng tỷ lệ khách hàng liên hệ trực tiếp.
+      </p>
+
+      <div class="buttons">
+        <a href="#" class="btn btn-primary">
+          💬 Nhắn Tin Tư Vấn
+        </a>
+
+        <a href="#" class="btn btn-outline">
+          Xem Demo Website
+        </a>
+      </div>
+
+    </div>
+
+    <div class="hero-image">
+
+      <div class="main-card">
+
+        <div class="chat-header">
+          <div class="avatar">💬</div>
+
+          <div>
+            <h3>Hỗ trợ trực tuyến</h3>
+            <div class="online">● Đang hoạt động</div>
+          </div>
+        </div>
+
+        <div class="message">
+          Xin chào 👋<br>
+          Bạn cần tư vấn thiết kế website hoặc landing page?
+        </div>
+
+        <div class="message user">
+          Tôi muốn làm website bán hàng
+        </div>
+
+        <div class="message">
+          Tuyệt vời 🎉<br>
+          Đội ngũ hỗ trợ sẽ phản hồi và gửi demo phù hợp cho bạn trong vài phút.
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="trust">
+
+    <div class="trust-box">
+      <h3>100+</h3>
+      <p>Website và landing page đã triển khai cho khách hàng.</p>
+    </div>
+
+    <div class="trust-box">
+      <h3>24/7</h3>
+      <p>Hỗ trợ khách hàng trực tuyến mọi lúc mọi nơi.</p>
+    </div>
+
+    <div class="trust-box">
+      <h3>99%</h3>
+      <p>Khách hàng hài lòng với trải nghiệm và tốc độ hỗ trợ.</p>
+    </div>
+
+  </section>
+
+  <section class="services">
+
+    <div class="section-title">
+      <h2>Dịch Vụ Nổi Bật</h2>
+      <p>Thiết kế hiện đại, tối ưu trải nghiệm và chuyển đổi khách hàng</p>
+    </div>
+
+    <div class="service-grid">
+
+      <div class="service-card">
+        <div class="icon">🎨</div>
+        <h3>UI/UX Design</h3>
+        <p>
+          Thiết kế giao diện hiện đại, chuyên nghiệp và tối ưu trải nghiệm người dùng.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">⚡</div>
+        <h3>Tối Ưu Hiệu Năng</h3>
+        <p>
+          Website tải nhanh, tối ưu SEO và hoạt động mượt mà trên mọi thiết bị.
+        </p>
+      </div>
+
+      <div class="service-card">
+        <div class="icon">📱</div>
+        <h3>Responsive</h3>
+        <p>
+          Giao diện tương thích điện thoại, tablet và desktop với trải nghiệm đồng nhất.
+        </p>
+      </div>
+
+    </div>
+
+  </section>
+
+  <section class="cta">
+
+    <div class="cta-box">
+
+      <h2>Sẵn Sàng Bắt Đầu Dự Án?</h2>
+
+      <p>
+        Nhắn tin trực tiếp để được tư vấn miễn phí về website doanh nghiệp,
+        landing page, cửa hàng online hoặc hệ thống quản lý phù hợp với nhu cầu của bạn.
+      </p>
+
+      <a href="#">
+        💬 Chat Với Chúng Tôi
+      </a>
+
+    </div>
+
+  </section>
+
+  <footer>
+    © 2026 HungVi Development. All Rights Reserved.
+  </footer>
+
+  <script>
+    window.$zoho=window.$zoho || {};
+    $zoho.salesiq=$zoho.salesiq||{ready:function(){}}
+  </script>
+
+  <script id="zsiqscript"
+    src="https://salesiq.zohopublic.com/widget?wc=siqa1cca8af050ad035f4f000d51c6c5840"
+    defer>
+  </script>
+
+</body>
+</html>
